@@ -1,0 +1,76 @@
+﻿@model IEnumerable<MVC.CalculadoraHoras.Models.RerporteSemana>
+
+@{
+    ViewBag.Title = "Report";
+}
+
+<h2>Reporte de horas por Tecnico y Semana</h2>
+
+<form method="get" action=@Url.Action("Report", "SolicitudServicio" )>
+    <div class="form-group">
+        @Html.TextBox("IdTecnico", null, new
+        {
+            placeholder = "Ingrese datos del Técnico",
+                                @class = "form-control"
+        })
+    </div>
+    <div class="form-group">
+        @Html.TextBox("SemanaAnio", 0, new
+        {
+            placeholder = "Ingrese número de semana",
+                                @class = "form-control",
+                                @type="number"
+
+        })
+    </div>
+    <button class="btn btn-default" type="submit">Buscar</button>
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraNormales)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraNocturnas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraDominicales)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HorasDExtras)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HorasNExtras)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HorasDomExtras)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraNormales)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraNocturnas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraDominicales)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HorasDExtras)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HorasNExtras)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HorasDomExtras)
+            </td>
+        </tr>
+    }
+
+</table>

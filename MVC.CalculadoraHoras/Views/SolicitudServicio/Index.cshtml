@@ -1,0 +1,66 @@
+﻿@model IEnumerable<MVC.CalculadoraHoras.Models.SolicitudServicio>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Servicios Recibidos y Agendados</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo Servicio", "Create","SolicitudServicio")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idServicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdTecnico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreTecnico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaSolicitud)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.idServicio)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IdTecnico)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NombreTecnico)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FechaSolicitud)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Estado)
+    </td>
+    <td>
+        @{
+            if (item.Estado == "Finalizado")
+            {
+                @Html.ActionLink("Cerrar Reporte", "Index", new { idServicio = item.idServicio, idTecnico = item.IdTecnico })
+            }
+            else
+            {
+                @Html.ActionLink("Cerrar Reporte", "Close", new { idServicio = item.idServicio, idTecnico = item.IdTecnico })
+            }
+        }
+
+
+    </td>
+</tr>
+}
+
+</table>
